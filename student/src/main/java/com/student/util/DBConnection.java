@@ -10,19 +10,20 @@ import java.util.logging.Logger;
 
 public class DBConnection {
     private static final Logger logger = Logger.getLogger(DBConnection.class.getName());
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/student_management?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
-    private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
+
+    // Read database configuration from environment variables with Neon defaults
+    private static final String DB_URL = System.getenv().getOrDefault("DB_URL", "jdbc:postgresql://ep-curly-art-a456yhbk-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require");
+    private static final String DB_USER = System.getenv().getOrDefault("DB_USER", "neondb_owner");
+    private static final String DB_PASSWORD = System.getenv().getOrDefault("DB_PASSWORD", "npg_KpDh4oXLFAG8");
+    private static final String DB_DRIVER = System.getenv().getOrDefault("DB_DRIVER", "org.postgresql.Driver");
 
     public static Connection getConnection() throws Exception {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, "root", "root");
-            logger.log(Level.FINE, "\ud83d\udccc Database connection established");
+            Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            logger.log(Level.FINE, "\uD83D\uDCCC Database connection established");
             return conn;
-        }
-        catch (Exception e) {
-            logger.log(Level.SEVERE, "\u274c Database connection failed: " + e.getMessage(), e);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "\u274C Database connection failed: " + e.getMessage(), e);
             throw new Exception("Failed to establish database connection", e);
         }
     }
@@ -31,10 +32,9 @@ public class DBConnection {
         if (conn != null) {
             try {
                 conn.close();
-                logger.log(Level.FINE, "\ud83d\udccc Database connection closed");
-            }
-            catch (Exception e) {
-                logger.log(Level.WARNING, "\u26a0\ufe0f Error closing database connection", e);
+                logger.log(Level.FINE, "\uD83D\uDCCC Database connection closed");
+            } catch (Exception e) {
+                logger.log(Level.WARNING, "\u26A0\uFE0F Error closing database connection", e);
             }
         }
     }
@@ -42,11 +42,10 @@ public class DBConnection {
     static {
         try {
             Class.forName(DB_DRIVER);
-            logger.log(Level.INFO, "\u2705 MySQL JDBC Driver loaded successfully");
-        }
-        catch (ClassNotFoundException e) {
-            logger.log(Level.SEVERE, "\u274c Failed to load MySQL JDBC Driver", e);
-            throw new RuntimeException("MySQL JDBC Driver not found", e);
+            logger.log(Level.INFO, "\u2705 JDBC Driver loaded successfully: " + DB_DRIVER);
+        } catch (ClassNotFoundException e) {
+            logger.log(Level.SEVERE, "\u274C Failed to load JDBC Driver: " + DB_DRIVER, e);
+            throw new RuntimeException("JDBC Driver not found: " + DB_DRIVER, e);
         }
     }
 }

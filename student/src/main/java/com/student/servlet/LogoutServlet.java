@@ -23,11 +23,14 @@ import java.io.IOException;
 public class LogoutServlet
 extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String referer = request.getHeader("Referer");
+        String redirectUrl = (referer != null && !referer.isEmpty()) ? referer : "admin.jsp";
+        
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
-        response.sendRedirect("admin.jsp");
+        response.sendRedirect(redirectUrl);
     }
 }
 
