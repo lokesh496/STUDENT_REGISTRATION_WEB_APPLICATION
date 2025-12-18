@@ -1,0 +1,8 @@
+target
+.m2
+.git
+.idea
+node_modules
+tools
+*.log
+**/classes-copy

@@ -1,0 +1,24 @@
+# Render service configuration (example). Replace placeholders before deploy.
+services:
+  - type: web
+    name: student-registration
+    env: docker
+    plan: free
+    dockerfilePath: student/Dockerfile
+    envVars:
+      - key: DB_URL
+        value: "REPLACE_WITH_JDBC_URL"
+      - key: DB_USER
+        value: "REPLACE_WITH_DB_USER"
+      - key: DB_PASSWORD
+        value: "REPLACE_WITH_DB_PASSWORD"
+      - key: DB_DRIVER
+        value: "com.mysql.cj.jdbc.Driver"
+      - key: SECRET_KEY
+        value: "REPLACE_WITH_SECRET"
+      - key: ADMIN_USER
+        value: "iamneo"
+      - key: ADMIN_PASS
+        value: "iamneo123"
+    buildCommand: ""
+    startCommand: ""
