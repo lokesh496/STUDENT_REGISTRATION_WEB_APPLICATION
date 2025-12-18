@@ -11,11 +11,11 @@ import java.util.logging.Logger;
 public class DBConnection {
     private static final Logger logger = Logger.getLogger(DBConnection.class.getName());
 
-    // Read database configuration from environment variables with Neon defaults
-    private static final String DB_URL = System.getenv().getOrDefault("DB_URL", "jdbc:postgresql://ep-curly-art-a456yhbk-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require");
-    private static final String DB_USER = System.getenv().getOrDefault("DB_USER", "neondb_owner");
-    private static final String DB_PASSWORD = System.getenv().getOrDefault("DB_PASSWORD", "npg_KpDh4oXLFAG8");
-    private static final String DB_DRIVER = System.getenv().getOrDefault("DB_DRIVER", "org.postgresql.Driver");
+    // Neon database configuration - hardcoded for Render deployment
+    private static final String DB_URL = "jdbc:postgresql://ep-curly-art-a456yhbk-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require";
+    private static final String DB_USER = "neondb_owner";
+    private static final String DB_PASSWORD = "npg_KpDh4oXLFAG8";
+    private static final String DB_DRIVER = "org.postgresql.Driver";
 
     public static Connection getConnection() throws Exception {
         try {

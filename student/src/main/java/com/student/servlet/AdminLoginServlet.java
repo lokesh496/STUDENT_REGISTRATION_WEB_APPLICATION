@@ -25,6 +25,8 @@ extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        
+        // Simple authentication for now
         if ("iamneo".equals(username) && "iamneo123".equals(password)) {
             HttpSession session = request.getSession(true);
             session.setAttribute("admin", (Object)true);
