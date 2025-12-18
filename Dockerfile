@@ -5,7 +5,7 @@ FROM tomcat:10.1-jdk17
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copy WAR file to webapps
-COPY target/student.war /usr/local/tomcat/webapps/ROOT.war
+COPY student/target/student.war /usr/local/tomcat/webapps/ROOT.war
 
 # Set environment variables
 ENV DB_URL=jdbc:postgresql://ep-curly-art-a456yhbk-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
