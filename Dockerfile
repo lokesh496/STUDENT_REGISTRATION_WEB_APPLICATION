@@ -1,5 +1,5 @@
 # Multi-stage Dockerfile: build WAR with Maven then run on Tomcat
-FROM maven:3.8.8-openjdk-17 AS build
+FROM maven:3.9.4-jdk-17 AS build
 WORKDIR /workspace
 
 # Copy student project sources and build the WAR
