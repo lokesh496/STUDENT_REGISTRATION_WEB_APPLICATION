@@ -13,7 +13,7 @@ services:
       - key: DB_PASSWORD
         value: "REPLACE_WITH_DB_PASSWORD"
       - key: DB_DRIVER
-        value: "com.mysql.cj.jdbc.Driver"
+        value: "org.postgresql.Driver"
       - key: SECRET_KEY
         value: "REPLACE_WITH_SECRET"
       - key: ADMIN_USER

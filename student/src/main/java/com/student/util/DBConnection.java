@@ -1,52 +1,43 @@
-/*
- * Decompiled with CFR 0.152.
- */
 package com.student.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DBConnection {
-    private static final Logger logger = Logger.getLogger(DBConnection.class.getName());
 
-    // Neon database configuration - hardcoded for Render deployment
-    private static final String DB_URL = "jdbc:postgresql://ep-curly-art-a456yhbk-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require";
-    private static final String DB_USER = "neondb_owner";
-    private static final String DB_PASSWORD = "npg_KpDh4oXLFAG8";
-    private static final String DB_DRIVER = "org.postgresql.Driver";
+    // Prefer environment variables for deployment (Render, Docker, CI).
+    // Fallback to the original Neon URL if env vars are not provided.
+    private static final String DEFAULT_URL =
+        "jdbc:postgresql://ep-curly-art-a456yhbk-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require&channelBinding=require";
 
     public static Connection getConnection() throws Exception {
-        try {
-            Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-            logger.log(Level.FINE, "\uD83D\uDCCC Database connection established");
-            return conn;
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "\u274C Database connection failed: " + e.getMessage(), e);
-            throw new Exception("Failed to establish database connection", e);
+        String url = System.getenv("DB_URL");
+        if (url == null || url.isEmpty()) {
+            url = DEFAULT_URL;
         }
-    }
 
-    public static void closeConnection(Connection conn) {
-        if (conn != null) {
-            try {
-                conn.close();
-                logger.log(Level.FINE, "\uD83D\uDCCC Database connection closed");
-            } catch (Exception e) {
-                logger.log(Level.WARNING, "\u26A0\uFE0F Error closing database connection", e);
-            }
-        }
-    }
+        String user = System.getenv("DB_USER");
+        String password = System.getenv("DB_PASSWORD");
 
-    static {
-        try {
-            Class.forName(DB_DRIVER);
-            logger.log(Level.INFO, "\u2705 JDBC Driver loaded successfully: " + DB_DRIVER);
-        } catch (ClassNotFoundException e) {
-            logger.log(Level.SEVERE, "\u274C Failed to load JDBC Driver: " + DB_DRIVER, e);
-            throw new RuntimeException("JDBC Driver not found: " + DB_DRIVER, e);
+        System.out.println("DEBUG: Connecting to URL: " + url);
+
+        // If a specific driver is provided via env, try to load it; otherwise attempt PostgreSQL driver
+        String driver = System.getenv("DB_DRIVER");
+        if (driver == null || driver.isEmpty()) {
+            driver = "org.postgresql.Driver";
         }
+        System.out.println("DEBUG: Using driver: " + driver);
+        Class.forName(driver);
+
+        Connection conn;
+        if (user != null && !user.isEmpty() && password != null && !password.isEmpty()) {
+            conn = DriverManager.getConnection(url, user, password);
+        } else {
+            // Allow URLs that already contain credentials or rely on socket/auth methods
+            conn = DriverManager.getConnection(url);
+        }
+
+        System.out.println("DEBUG: Connection successful to: " + conn.getMetaData().getURL());
+        return conn;
     }
 }
-

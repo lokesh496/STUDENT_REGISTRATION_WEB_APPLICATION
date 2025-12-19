@@ -1,0 +1,22 @@
+# Ignore local env files with secrets
+.env
+student/.env
+
+# Build artifacts
+/target/
+/student/target/
+
+# Maven / IDE
+/.settings/
+/.idea/
+*.iml
+*.class
+
+# Tools/decompiler artifacts
+/tools/decompiler/target/
+/tools/decompiler/classes-copy/
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
