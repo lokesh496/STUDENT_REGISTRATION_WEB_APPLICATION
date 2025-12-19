@@ -7,8 +7,8 @@
   <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
 
   <Service name="Catalina">
-    <!-- HTTP Connector on 8080 -->
-    <Connector port="8080" protocol="HTTP/1.1"
+    <!-- HTTP Connector (port substituted at container start) -->
+    <Connector port="PORT_PLACEHOLDER" protocol="HTTP/1.1"
                connectionTimeout="20000"
                redirectPort="8443" />
 
