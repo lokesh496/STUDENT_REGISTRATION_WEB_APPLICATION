@@ -18,9 +18,9 @@ public class QuickTest {
             System.out.println("Database URL: " + url);
             
             if (url.contains("neon.tech")) {
-                System.out.println("SUCCESS: Connected to NEON MySQL database!");
+                System.out.println("SUCCESS: Connected to NEON (Postgres) database!");
             } else {
-                System.out.println("WARNING: NOT connected to Neon MySQL!");
+                System.out.println("WARNING: NOT connected to Neon (Postgres) database!");
             }
             
             Statement stmt = conn.createStatement();

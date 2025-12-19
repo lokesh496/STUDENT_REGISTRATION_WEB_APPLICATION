@@ -34,7 +34,7 @@
             <div class="info"><strong>Database Version:</strong> <%= dbVersion %></div>
     <%
             
-            // Check if we're connected to Neon (MySQL)
+            // Check if we're connected to Neon (Postgres)
             if (dbUrl.contains("neon.tech")) {
     %>
                 <div class="success">🎉 Connected to NEON database!</div>
