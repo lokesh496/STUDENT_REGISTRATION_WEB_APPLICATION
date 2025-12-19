@@ -1,5 +1,5 @@
 <%@ page import="java.sql.*" %>
-<%@ page import="com.mysql.cj.jdbc.Driver" %>
+<%@ page import="com.student.util.DBConnection" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,45 +21,32 @@
     <hr>
 
     <%
-        try {
-            // Load driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-    %>
-            <div class="success">✅ MySQL JDBC Driver loaded successfully</div>
-    <%
-            
-            // Connect to database
-            Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://ep-curly-art-a456yhbk-pooler.us-east-1.aws.neon.tech:3306/neondb?sslMode=REQUIRED&useSSL=true",
-                "neondb_owner",
-                "npg_KpDh4oXLFAG8"
-            );
+        try (Connection conn = DBConnection.getConnection()) {
+            DatabaseMetaData meta = conn.getMetaData();
+            String url = meta.getURL();
+            String product = meta.getDatabaseProductName();
+            String version = meta.getDatabaseProductVersion();
     %>
             <div class="success">✅ Connected to database successfully</div>
+            <div class="success"><strong>URL:</strong> <%= url %></div>
+            <div class="success"><strong>Product:</strong> <%= product %> (<%= version %>)</div>
+
     <%
-            
-            // Count students
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) as total FROM students WHERE deleted_at IS NULL");
             int studentCount = 0;
-            if (rs.next()) {
-                studentCount = rs.getInt("total");
-            }
+            if (rs.next()) studentCount = rs.getInt("total");
     %>
             <div class="success">✅ Total Active Students in Database: <strong><%= studentCount %></strong></div>
+
     <%
-            
-            // Count courses
             rs = stmt.executeQuery("SELECT COUNT(*) as total FROM courses");
             int courseCount = 0;
-            if (rs.next()) {
-                courseCount = rs.getInt("total");
-            }
+            if (rs.next()) courseCount = rs.getInt("total");
     %>
             <div class="success">✅ Total Courses in Database: <strong><%= courseCount %></strong></div>
+
     <%
-            
-            // Get student list with course names
             rs = stmt.executeQuery(
                 "SELECT s.id, s.name, s.email, c.course_name, s.status FROM students s " +
                 "JOIN courses c ON s.course_id = c.id " +
@@ -88,8 +75,6 @@
                 </tr>
     <%
             }
-            
-            conn.close();
         } catch (Exception e) {
     %>
             <div class="error">❌ Error: <%= e.getMessage() %></div>
@@ -107,7 +92,7 @@
     
     <hr>
     <p style="color: #666; font-size: 12px;">
-        If you see 5 students and 12 courses above, the database is working correctly!
+        If you see students and courses above, the database is working correctly.
     </p>
     <p><a href="admin.jsp">← Back to Login</a></p>
 </div>
