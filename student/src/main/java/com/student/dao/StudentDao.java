@@ -97,7 +97,8 @@ public class StudentDao {
             return false;
         }
         catch (SQLException e) {
-            if (e.getErrorCode() == 1062) {
+            String sqlState = e.getSQLState();
+            if ("23505".equals(sqlState) || e.getErrorCode() == 1062) {
                 logger.log(Level.WARNING, "\u26a0\ufe0f Duplicate email: " + student.getEmail());
                 return false;
             }
@@ -243,7 +244,8 @@ public class StudentDao {
             return bl;
         }
         catch (SQLException e) {
-            if (e.getErrorCode() == 1062) {
+            String sqlState = e.getSQLState();
+            if ("23505".equals(sqlState) || e.getErrorCode() == 1062) {
                 logger.log(Level.WARNING, "\u26a0\ufe0f Duplicate email: " + student.getEmail());
                 return false;
             }
