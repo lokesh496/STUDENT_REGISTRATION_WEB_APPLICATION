@@ -49,11 +49,11 @@
             <version>3.0.0</version>
         </dependency>
 
-        <!-- MySQL JDBC Driver -->
+        <!-- PostgreSQL JDBC Driver (Neon) -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.28</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.3</version>
         </dependency>
 
         <!-- JavaMail for Email Functionality -->
