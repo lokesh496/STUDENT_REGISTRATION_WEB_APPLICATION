@@ -1,5 +1,5 @@
 <%@ page import="java.sql.*" %>
-<%@ page import="org.postgresql.Driver" %>
+<%@ page import="com.mysql.cj.jdbc.Driver" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,14 +23,14 @@
     <%
         try {
             // Load driver
-            Class.forName("org.postgresql.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
     %>
-            <div class="success">✅ PostgreSQL JDBC Driver loaded successfully</div>
+            <div class="success">✅ MySQL JDBC Driver loaded successfully</div>
     <%
             
             // Connect to database
             Connection conn = DriverManager.getConnection(
-                "jdbc:postgresql://ep-curly-art-a456yhbk-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require",
+                "jdbc:mysql://ep-curly-art-a456yhbk-pooler.us-east-1.aws.neon.tech:3306/neondb?sslMode=REQUIRED&useSSL=true",
                 "neondb_owner",
                 "npg_KpDh4oXLFAG8"
             );

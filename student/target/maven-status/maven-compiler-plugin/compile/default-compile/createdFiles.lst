@@ -1,7 +1,11 @@
+com\student\servlet\TestConnectionServlet.class
+com\student\util\DataInserter.class
 com\student\servlet\AdminDashboardServlet.class
 com\student\util\LoggerConfig.class
+com\student\util\DBTestServlet.class
 com\student\dao\AdminDao.class
 com\student\util\PasswordHasher.class
+com\student\util\QuickTest.class
 com\student\servlet\DeleteServlet.class
 com\student\util\PaginationUtil.class
 com\student\model\Student.class

@@ -1,9 +1,11 @@
+C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\util\DataInserter.java
 C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\util\PasswordHasher.java
 C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\servlet\SearchServlet.java
 C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\servlet\AdminLoginServlet.java
 C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\servlet\LogoutServlet.java
 C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\model\Student.java
 C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\servlet\RegisterServlet.java
+C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\util\DBTestServlet.java
 C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\util\ValidationUtils.java
 C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\servlet\DeleteServlet.java
 C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\util\LoggerConfig.java
@@ -16,4 +18,6 @@ C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student
 C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\servlet\ViewServlet.java
 C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\util\PaginationUtil.java
 C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\dao\AdminDao.java
+C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\util\QuickTest.java
+C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\servlet\TestConnectionServlet.java
 C:\Users\LokeshKumar\Desktop\student-workspace\student\src\main\java\com\student\util\AppConstants.java
